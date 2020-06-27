@@ -77,10 +77,16 @@ class Ui_Dialog(object):
         self.textEdit__Status = QtWidgets.QTextEdit(Dialog)
         self.textEdit__Status.setGeometry(QtCore.QRect(360, 410, 141, 31))
         self.textEdit__Status.setObjectName("textEdit__Status")
-        #Creating Calculate button
+        #####  Creating Calculate button  ######
         self.pushButton_Get_Result = QtWidgets.QPushButton(Dialog)
-        self.pushButton_Get_Result.setGeometry(QtCore.QRect(500, 120, 93, 28))
+        self.pushButton_Get_Result.setGeometry(QtCore.QRect(450, 120, 93, 28))
         self.pushButton_Get_Result.setObjectName("pushButton_Get_Result")
+
+        #####  Creating Reset button  ######
+        self.pushButton_Reset = QtWidgets.QPushButton(Dialog)
+        self.pushButton_Reset.setGeometry(QtCore.QRect(560, 120, 93, 28))
+        self.pushButton_Reset.setObjectName("pushButton_Reset")
+
 
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setGeometry(QtCore.QRect(250, 10, 251, 31))
@@ -171,8 +177,12 @@ class Ui_Dialog(object):
         self.Status.setText(_translate("Dialog","Status"))
 
 
+        ###### Creating Label for Buttons #########
 
         self.pushButton_Get_Result.setText(_translate("Dialog", "Get_Result"))
+        self.pushButton_Reset.setText(_translate("Dialog", "Reset"))
+
+        #######      LABELS ##########
 
         self.label_4.setText(_translate("Dialog", "...Student Report..."))
         self.Student_name.setText(_translate("Dialog", "Student Name :"))
@@ -218,6 +228,7 @@ class Ui_Dialog(object):
 
         else:
             self.textEdit_Result.setText("Failed")
+            self.textEdit__Status.setText(" ")
 
 
 if __name__ == "__main__":
