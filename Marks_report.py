@@ -208,22 +208,23 @@ class Ui_Dialog(object):
         self.textEdit_2.setText(str("{:.2f}".format(Avg)))
         self.Percent = ((float(self.textEdit_Telugu.toPlainText()) + float(self.textEdit_Hindi.toPlainText()) + float(
             self.textEdit_English.toPlainText()) + float(self.textEdit_Maths.toPlainText()) + float(
-            self.textEdit_Science.toPlainText()) + float(self.textEdit_Social.toPlainText())) / 300) * 100
+            self.textEdit_Science.toPlainText()) + float(self.textEdit_Social.toPlainText())) / 600) * 100
         self.textEdit_3.setText(str("{:.1f} %".format(self.Percent)))
-        if self.Percent > 70:
+        if self.Percent > 90:
             self.textEdit__Status.setText("Distinction")
-        elif self.Percent > 60:
+        elif self.Percent > 80:
             self.textEdit__Status.setText("First Class")
-        elif self.Percent > 45:
+        elif self.Percent > 60:
             self.textEdit__Status.setText("Second Class")
-        elif self.Percent > 30:
-            self.textEdit_Result.setText("Passed")
         else:
-            self.textEdit_Result.setText("Failed")
+            self.textEdit_Result.setText("Passed")
+            self.textEdit__Status.setText(" ")
+
+
 
 
     def Res(self):
-        if self.Percent > 30:
+        if self.Percent > 40:
             self.textEdit_Result.setText("Passed")
 
         else:
