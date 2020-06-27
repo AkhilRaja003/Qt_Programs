@@ -62,15 +62,15 @@ class Ui_Dialog(object):
         self.textEdit_English = QtWidgets.QTextEdit(Dialog)
         self.textEdit_English.setGeometry(QtCore.QRect(160, 220, 104, 31))
         self.textEdit_English.setObjectName("textEdit_English")
-        self.textEdit = QtWidgets.QTextEdit(Dialog)
-        self.textEdit.setGeometry(QtCore.QRect(540, 170, 104, 31))
-        self.textEdit.setObjectName("textEdit")
-        self.textEdit_2 = QtWidgets.QTextEdit(Dialog)
-        self.textEdit_2.setGeometry(QtCore.QRect(540, 210, 104, 31))
-        self.textEdit_2.setObjectName("textEdit_2")
-        self.textEdit_3 = QtWidgets.QTextEdit(Dialog)
-        self.textEdit_3.setGeometry(QtCore.QRect(540, 250, 104, 31))
-        self.textEdit_3.setObjectName("textEdit_3")
+        self.textEdit_Total = QtWidgets.QTextEdit(Dialog)
+        self.textEdit_Total.setGeometry(QtCore.QRect(540, 170, 104, 31))
+        self.textEdit_Total.setObjectName("textEdit")
+        self.textEdit_Average = QtWidgets.QTextEdit(Dialog)
+        self.textEdit_Average.setGeometry(QtCore.QRect(540, 210, 104, 31))
+        self.textEdit_Average.setObjectName("textEdit_2")
+        self.textEdit_Percentage = QtWidgets.QTextEdit(Dialog)
+        self.textEdit_Percentage.setGeometry(QtCore.QRect(540, 250, 104, 31))
+        self.textEdit_Percentage.setObjectName("textEdit_3")
         self.textEdit_Result = QtWidgets.QTextEdit(Dialog)
         self.textEdit_Result.setGeometry(QtCore.QRect(360, 450, 104, 31))
         self.textEdit_Result.setObjectName("textEdit_Result")
@@ -119,9 +119,17 @@ class Ui_Dialog(object):
         font.setWeight(75)
         self.Class.setFont(font)
         self.Class.setObjectName("Class")
+        self.max = QtWidgets.QLabel(Dialog)
+        self.max.setGeometry(QtCore.QRect(600, 30, 106, 20))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setItalic(True)
+        font.setWeight(75)
+        self.max.setFont(font)
+        self.max.setObjectName("max marks:100")
         self.comboBox_class = QtWidgets.QComboBox(Dialog)
         self.comboBox_class.setGeometry(QtCore.QRect(130, 80, 73, 22))
-        self.comboBox_class.setEditable(True)
+        self.comboBox_class.setEditable(False)
         self.comboBox_class.setObjectName("comboBox_class")
         self.comboBox_class.addItem("")
         self.comboBox_class.addItem("")
@@ -157,14 +165,15 @@ class Ui_Dialog(object):
         self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        self.pushButton_Get_Result.clicked.connect(self.Total_marks)
+        self.pushButton_Get_Result.clicked.connect(self.Total_Result)
         self.pushButton_Get_Result.clicked.connect(self.Res)
+        self.pushButton_Reset.clicked.connect(self.Reset)
 
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Student Report"))
-        self.Telugu.setText(_translate("Dialog", "Tekugu"))
+        self.Telugu.setText(_translate("Dialog", "Telugu"))
         self.Hindi.setText(_translate("Dialog", "Hindi"))
         self.English.setText(_translate("Dialog", "English"))
         self.Maths.setText(_translate("Dialog", "Maths"))
@@ -179,13 +188,14 @@ class Ui_Dialog(object):
 
         ###### Creating Label for Buttons #########
 
-        self.pushButton_Get_Result.setText(_translate("Dialog", "Get_Result"))
+        self.pushButton_Get_Result.setText(_translate("Dialog", "Get Result"))
         self.pushButton_Reset.setText(_translate("Dialog", "Reset"))
 
         #######      LABELS ##########
 
         self.label_4.setText(_translate("Dialog", "...Student Report..."))
         self.Student_name.setText(_translate("Dialog", "Student Name :"))
+        self.max.setText(_translate("Dialog", "max marks: 100"))
         self.Class.setText(_translate("Dialog", "Class :"))
         self.comboBox_class.setItemText(0, _translate("Dialog", "1"))
         self.comboBox_class.setItemText(1, _translate("Dialog", "2"))
@@ -199,17 +209,17 @@ class Ui_Dialog(object):
         self.comboBox_class.setItemText(9, _translate("Dialog", "10"))
 
 
-    def Total_marks(self):
+    def Total_Result(self):
         totalsum = float(self.textEdit_Telugu.toPlainText()) + float(self.textEdit_Hindi.toPlainText()) + float(self.textEdit_English.toPlainText()) + float(self.textEdit_Maths.toPlainText()) + float(self.textEdit_Science.toPlainText()) + float(self.textEdit_Social.toPlainText())
-        self.textEdit.setText(str("{:.2f}".format(totalsum)))
+        self.textEdit_Total.setText(str("{:.2f}".format(totalsum)))
         Avg = (float(self.textEdit_Telugu.toPlainText()) + float(self.textEdit_Hindi.toPlainText()) + float(
             self.textEdit_English.toPlainText()) + float(self.textEdit_Maths.toPlainText()) + float(
             self.textEdit_Science.toPlainText()) + float(self.textEdit_Social.toPlainText())) / 6
-        self.textEdit_2.setText(str("{:.2f}".format(Avg)))
+        self.textEdit_Average.setText(str("{:.2f}".format(Avg)))
         self.Percent = ((float(self.textEdit_Telugu.toPlainText()) + float(self.textEdit_Hindi.toPlainText()) + float(
             self.textEdit_English.toPlainText()) + float(self.textEdit_Maths.toPlainText()) + float(
             self.textEdit_Science.toPlainText()) + float(self.textEdit_Social.toPlainText())) / 600) * 100
-        self.textEdit_3.setText(str("{:.1f} %".format(self.Percent)))
+        self.textEdit_Percentage.setText(str("{:.1f} %".format(self.Percent)))
         if self.Percent > 90:
             self.textEdit__Status.setText("Distinction")
         elif self.Percent > 80:
@@ -221,8 +231,6 @@ class Ui_Dialog(object):
             self.textEdit__Status.setText(" ")
 
 
-
-
     def Res(self):
         if self.Percent > 40:
             self.textEdit_Result.setText("Passed")
@@ -230,6 +238,19 @@ class Ui_Dialog(object):
         else:
             self.textEdit_Result.setText("Failed")
             self.textEdit__Status.setText(" ")
+
+    def Reset(self):
+        self.textEdit_Telugu.clear()
+        self.textEdit_Hindi.clear()
+        self.textEdit_English.clear()
+        self.textEdit_Maths.clear()
+        self.textEdit_Science.clear()
+        self.textEdit_Social.clear()
+        self.textEdit__Status.clear()
+        self.textEdit_Result.clear()
+        self.textEdit_Total.clear()
+        self.textEdit_Average.clear()
+        self.textEdit_Percentage.clear()
 
 
 if __name__ == "__main__":
